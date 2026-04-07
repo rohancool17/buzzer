@@ -1,0 +1,284 @@
+:root {
+    --primary-green: #00b08b;
+    --primary-blue: #00bff3;
+    --secondary-yellow: #ffc800;
+    --text-color: #2c3e50;
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(237, 235, 235, 1) 0.1%, rgba(237, 235, 235, 0.28) 90.1%);
+    --buzzer-red: #ff4d4d;
+    --buzzer-red-dark: #b30000;
+    --buzzer-blue: #00bff3;
+    --buzzer-blue-dark: #0084ad;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: var(--font-main);
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    padding: 0 1rem; /* Base side padding */
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.screen {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 1rem 2rem; /* Increased top padding for logo clearance */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#screen2.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    margin: auto 0;
+    padding: 2rem 0;
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards ease-out;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Text Styling */
+h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.2;
+}
+
+#screen2 h1 {
+    font-size: 2rem;
+    color: var(--primary-blue);
+}
+
+.header-logo-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+.header-logo {
+    width: clamp(220px, 60vw, 450px);
+    height: auto;
+    object-fit: contain;
+    image-rendering: high-quality;
+}
+
+p,
+h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.4;
+}
+
+.highlight-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-top: 0.5rem;
+}
+
+.logo-footer {
+    width: clamp(200px, 60vw, 350px);
+    margin-top: 2rem;
+}
+
+.footer-logo {
+    width: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+}
+
+.hero-logo {
+    width: clamp(280px, 70vw, 500px);
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+}
+
+/* Top Right Logo Styling */
+.top-logo {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: clamp(140px, 30vw, 220px); /* Significantly increased for visibility */
+    z-index: 100;
+    pointer-events: none;
+    /* Prevents logo from interfering with clicks */
+}
+
+.top-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+}
+
+/* 3D Buzzer Button Styling */
+.buzzer-container {
+    perspective: 1000px;
+    margin: 2rem 0;
+}
+
+.buzzer-3d {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.buzzer-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--buzzer-red);
+    box-shadow:
+        0 8px 0 var(--buzzer-red-dark),
+        0 15px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s, background 0.5s, box-shadow 0.1s;
+    display: block;
+    z-index: 2;
+}
+
+.buzzer-base {
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    background: #333;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+}
+
+.buzzer-3d:active .buzzer-top {
+    transform: translateY(8px);
+    box-shadow:
+        0 0 0 var(--buzzer-red-dark),
+        0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Color transition for blue state */
+.buzzer-3d.blue .buzzer-top {
+    background: var(--buzzer-blue);
+    box-shadow:
+        0 8px 0 var(--buzzer-blue-dark),
+        0 15px 20px rgba(0, 0, 0, 0.3);
+}
+
+.buzzer-3d.blue:active .buzzer-top {
+    box-shadow:
+        0 0 0 var(--buzzer-blue-dark),
+        0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Background gradient details */
+#screen2 {
+    background: radial-gradient(circle at center, #ffffff 0%, #edebeb 100%);
+}
+
+#screen2 .hero-logo {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    animation: scaleIn 0.8s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments for very small/short screens */
+@media screen and (max-height: 720px), screen and (max-width: 380px) {
+    .content-wrapper {
+        gap: 1.5rem;
+    }
+    
+    .buzzer-3d {
+        width: 150px;
+        height: 150px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .highlight-text {
+        font-size: 1.5rem;
+    }
+}

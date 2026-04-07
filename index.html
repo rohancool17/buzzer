@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>USEMA Inauguration</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="top-logo">
+            <img src="USVlogo_1200.png" 
+                 srcset="USVlogo_1200.png 1200w, USVlogo_2500.png 2500w" 
+                 sizes="(max-width: 600px) 160px, 220px" 
+                 alt="USV Logo">
+        </div>
+        <!-- Screen 1: Inauguration -->
+        <section id="screen1" class="screen active">
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h1 class="fade-in">We are honored to have you at</h1>
+                    <div class="header-logo-container fade-in delay-1">
+                        <img src="Usema Circle_1200.png" 
+                             srcset="Usema Circle_600.png 600w, Usema Circle_1200.png 1200w, Usema Circle_2500.png 2500w" 
+                             sizes="(max-width: 600px) 250px, 400px" 
+                             alt="USEMA Circle Logo" 
+                             class="header-logo">
+                    </div>
+                    <p class="fade-in delay-1">Please press buzzer to inaugurate the </p>
+                    <p class="fade-in highlight-text delay-1">USEMA support program.</p>
+                </div>
+
+                <div class="buzzer-container">
+                    <button id="buzzer" class="buzzer-3d red" aria-label="Press Buzzer">
+                        <span class="buzzer-top"></span>
+                        <span class="buzzer-base"></span>
+                    </button>
+                </div>
+
+                <div class="logo-footer">
+                    <img src="USEMAFirstpage_1200.png" 
+                         srcset="USEMAFirstpage_600.png 600w, USEMAFirstpage_1200.png 1200w, USEMAFirstpage_2500.png 2500w" 
+                         sizes="(max-width: 600px) 300px, 400px" 
+                         alt="USEMA Logo" class="footer-logo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 2: Launch -->
+        <section id="screen2" class="screen">
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h1 class="fade-in">We are pleased to Launch</h1>
+                </div>
+                <div class="logo-hero">
+                    <img src="Circle of Care_1200.png" 
+                         srcset="Circle of Care_600.png 600w, Circle of Care_1200.png 1200w, Circle of Care_1500.png 1500w, Circle of Care_2500.png 2500w" 
+                         sizes="(max-width: 600px) 400px, 600px" 
+                         alt="Circle of Care Logo" class="hero-logo">
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
