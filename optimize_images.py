@@ -5,12 +5,19 @@ import os
 Image.MAX_IMAGE_PIXELS = None 
 
 def create_responsive_versions(filename, sizes, sharpen_factor=1.0):
-    """Generates multiple resized versions of an image for srcset with customizable sharpening."""
+    """Generates multiple resized versions of an image for srcset with autocrop and sharpening."""
     if not os.path.exists(filename):
         print(f"File not found: {filename}")
         return
 
-    img = Image.open(filename)
+    img = Image.open(filename).convert("RGBA")
+    
+    # Autocrop transparency to ensure 'fits properly' on web-page
+    bbox = img.getbbox()
+    if bbox:
+        img = img.crop(bbox)
+        print(f"  Autocropped {filename} to {img.size}")
+
     original_size = img.size
     print(f"Processing {filename}: {original_size} (Sharpen Factor: {sharpen_factor})")
 
@@ -30,10 +37,10 @@ def create_responsive_versions(filename, sizes, sharpen_factor=1.0):
         
         # Apply sharpening for web-sized images to maintain crispness
         if size <= 1500:
-            # We apply it twice if a higher sharpen factor is requested for fine-detailed logos
-            resized_img = resized_img.filter(ImageFilter.SHARPEN)
-            if sharpen_factor > 1.0:
-                resized_img = resized_img.filter(ImageFilter.SHARPEN)
+            # Enhanced sharpening using UnsharpMask for professional 'pop'
+            # We apply it with radius 1 and percent 50-100 based on sharpen factor
+            percent = int(50 * sharpen_factor)
+            resized_img = resized_img.filter(ImageFilter.UnsharpMask(radius=1, percent=percent, threshold=3))
             
         output_name = f"{base_name}_{size}{ext}"
         resized_img.save(output_name, optimize=True)
